@@ -8,7 +8,8 @@ module.exports = {
             nome,
             email,
             senha,
-            celular
+            celular,
+            primeiro_login: "true"
         });
         if(user){
             res.status(200).json({
@@ -23,14 +24,14 @@ module.exports = {
         
     },
     async editarUsuario(req, res){
-        const { email, nome, senha, celular, primeiro_login } = req.body;
+        const { email, nome, senha, celular } = req.body;
         
         const sucesso = await User.findOneAndUpdate({ email}, {
             email, 
             nome, 
             senha, 
             celular,
-            primeiro_login,
+            primeiro_login: "false",
         }).then(function(result){
             return true;
         }).catch(e =>{
